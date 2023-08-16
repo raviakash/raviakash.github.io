@@ -1,0 +1,7 @@
+@mastersthesis{raviakash_2023_mbrl,
+  author = {Ravi Akash},
+  title = {Model Based Reinforcement Learning under Sparse Rewards},
+  year = {2023},
+  school = {University of Stuttgart},
+  type = {Master's thesis},
+}
