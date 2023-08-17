@@ -16,9 +16,7 @@
 
 <body>
 
-<div class="title">
-    Model-Based Reinforcement Learning under Sparse Rewards
-</div>
+<div class="title">Model-Based Reinforcement Learning under Sparse Rewards</div>
 <center>
 <span class="venue tap_targets"><a href="files/Model Based Reinforcement Learning_Ravi Akash.pdf">Thesis Report</a></span>
 <span class="tag tap_targets">
@@ -51,7 +49,25 @@
     training. These design combinations will be evaluated on continuous control tasks with established
     benchmarks.
 </p>
+<br>
 
+<div class="intro">Introduction</div>
+<p>
+  The major motivation behind studying sparse reward problems is that it requires close to no domain
+  knowledge to design a reward function for a given task/environment. For example, in a continuous
+  control task where a robotic arm task is required to stack an object on top of other objects, we
+  can assign a sparse reward of 1 if the robotic arm successfully stacks the object and 0 otherwise.
+  Designing intermediate rewards in this scenario can be challenging and in most cases not practical.
+  The sparse reward problem has been addressed in previous state-of-the-art literature in a plethora
+  of ways. However, research in MBRL under a sparse reward setting has not answered some key questions 
+  such as how accurate and diverse the model should be, how much off-policy data must be stored inside 
+  the model buffer, and how long the rollout trajectory should be. While it is fairly common for authors 
+  to regularly experiment and provide various algorithms for solving sparse reward tasks, it still remains 
+  an open question as to what the key ingredients and design choices which are essential for solving sparse
+  reward tasks. The study carried out in this thesis helps us understand why some hyperparameter design choices 
+  might be working better than others through the lens of the dataset which we use to train the agent.
+</p>
+<br>
 
 </center>
 
@@ -59,12 +75,12 @@
   Model-Based Reinforcement Learning under Sparse Rewards
 </div>
 <div class="authors">
-  <a href="www.linkedin.com/in/ravi-akash">Ravi Akash, Masters Student at University of Stuttgart</a>,<br> 
+  <a href="https://www.linkedin.com/in/ravi-akash/">Ravi Akash, Masters Student at University of Stuttgart</a>,<br> 
   <a href="https://celuis.com/">Carlos Luis, PhD Student at Bosch Center for Artificial Intelligence</a>,<br>
   <a href="https://berkenkamp.me/">Felix Berkenkamp, Research Scientist at Bosch Center for Artificial Intelligence  </a>, and <br>
   <a href="http://www.matlog.net/">Mathias Niepert, Full professor (W3) at University of Stuttgart</a>
 </div>
-
+<br>
 
 <div class="acknowledgements">Acknowledgements</div>
 <p>
@@ -73,6 +89,12 @@
   shaping the outcomes of my research. This accomplishment would not have been possible without your unwavering support, 
   and I am truly grateful for the opportunity to learn and grow under your guidance.
 </p>
+
+<div class="citation">References</div>
+<div class="authors">
+  <a href="https://arxiv.org/abs/1906.08253">Janner, Michael, et al. "When to trust your model: Model-based policy optimization." Advances in neural information processing systems 32 (2019).</a>
+</div>
+<br>
 
 </body>
 </html>

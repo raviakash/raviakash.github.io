@@ -27,7 +27,16 @@ body {
 .tap_targets {
   font-size: 1.2em;
 }
+
 .header {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-right: 1em;
+  /*color: #bb2222;*/
+  color: #882222;
+}
+
+.intro {
   font-weight: bold;
   font-size: 1.2em;
   padding-right: 1em;
