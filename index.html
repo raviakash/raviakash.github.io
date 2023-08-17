@@ -79,6 +79,42 @@
 </p>
 <br>
 
+<div class="header">Model-Based Policy Optimization</div>
+<p>
+  The natural choice of MBPO model-based algorithm to further investigate is that it is a natural extension
+  of model-free counterpart SAC. In this approach, the learned model is used to gather imaginary
+  data to train a policy. To gather this imaginary data, a bootstrap ensemble of dynamics model is
+  utilized where each member of the ensemble is a probabilistic neural network. Using probabilistic
+  neural networks, aleatoric uncertainty, or noise in outputs relative to inputs, is captured while
+  bootstrapping ensures to capture of epistemic uncertainty or uncertainty in model parameters. To
+  generate a prediction from the ensemble, a random model is sampled from the ensemble of the
+  dynamics model to test different transitions along a single model rollout.
+  <br>
+  <center>
+  <img src="images/MBPO Agent.jpg" alt="MBPO architecture" width="100%" height="auto">
+  <figcaption>Figure 1: Detailed architecture depicting the individual components of an MBPO agent, which
+    utilizes SAC as a policy optimization algorithm. The Figure depicts the interaction of the
+    SAC agent with the stochastic environment to collect real experiences, which are later
+    utilized to train a predictive model to generate a simulated experience. This simulated
+    experience is later utilized as input to the SAC algorithm for policy optimization.</figcaption>
+  </center>
+  <br>
+  Policy optimization is performed using SAC (Soft Actor-Critic), where SAC alternates between a policy evaluation step, 
+  which estimates the state-action value function, and a policy improvement step. For all the experiments, we use the 
+  automatic entropy tuning flag that adaptively modifies the entropy gain based on the stochasticity of the policy.
+  Performing extended model rollouts leads to compounding error problems. To mitigate this problem,
+  the MBPO algorithm begins propagating short model rollouts from state distribution of a different
+  policy under the true environment dynamics. As a result, a few long trajectories with large errors
+  can be traded for many short trajectories with smaller errors. The Figure 1 shows the architecture
+  of a MBPO agent.
+  <br>
+  <center>
+    <img src="images/MBPO algorithm.JPG" alt="MBPO architecture" width="100%" height="auto">
+    <figcaption>Figure 2:Model-Based Policy Opimization Algorithm </figcaption>
+    </center>
+</p>
+<br>
+
 </center>
 
 <div class="header">
