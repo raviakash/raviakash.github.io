@@ -36,14 +36,6 @@ body {
   color: #882222;
 }
 
-.intro {
-  font-weight: bold;
-  font-size: 1.2em;
-  padding-right: 1em;
-  /*color: #bb2222;*/
-  color: #882222;
-}
-
 .image {
   text-align: center;
   padding-top: .5em;
@@ -95,12 +87,4 @@ a:hover {
   /*font-weight: bold;*/
   text-decoration: none;
   padding-right: .5em;
-}
-
-.acknowledgements {
-  font-weight: bold;
-  font-size: 1.2em;
-  padding-right: 1em;
-  /*color: #bb2222;*/
-  color: #882222;
 }
