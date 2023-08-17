@@ -34,6 +34,15 @@ body {
   /*color: #bb2222;*/
   color: #882222;
 }
+
+.acknowledgements {
+  font-weight: bold;
+  font-size: 1.2em;
+  padding-right: 1em;
+  /*color: #bb2222;*/
+  color: #882222;
+}
+
 .image {
   text-align: center;
   padding-top: .5em;
@@ -70,8 +79,17 @@ a:hover {
 /* metadata */
 .citation {
   font-weight: bold;
-  font-size:  1em;
+  font-size: 1.2em;
+  padding-right: 1em;
+  /*color: #bb2222;*/
+  color: #882222;
 }
+
+/*.citation {
+  font-weight: bold;
+  font-size:  1em;
+}*/
+
 .authors {
   color: inherit;
 }
