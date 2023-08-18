@@ -304,7 +304,7 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 <div class="text">
   <p>
     <strong>Rollouts per step Ablation</strong>, Figure 12 compares rollouts per step in sparse pendulum and mountain 
-    car environments. Figure 12 presents an ablation study in sparse pendulum and mountain car environments. In sparse
+    car environments. In sparse
     pendulum, M = 1000 resulted in lower returns, possibly due to noise from excessive rollouts or model complexity leading 
     to memorization. In mountain car, M = 1000 initially sped up training but eventually showed a similar pattern to sparse pendulum. 
     Wasserstein and MMD distance metric plots show consistent model behavior across different initial state quantities from the environment 
@@ -319,6 +319,27 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
     (Bottom row) environment. (Left column) We report the learning curves, (Center
     column) corresponds to theWasserstein distance metric, and (Right column) corresponds
     to the MMD distance metric of different rollouts per step. </figcaption>
+</center>
+
+<div class="text">
+  <p>
+    <strong>Updates to retain buffer</strong>, Figure 13 compares updates to retain buffer in sparse pendulum and mountain 
+    car environment. In Figure 13, the evaluation return plots show that in sparse pendulum, retaining buffer values at 1 yields 
+    on-policy behavior and contributes to better learning performance. In complex mountain car, having more off-policy data helps solve 
+    the environment which indicates that retaining past information assisted the model in solving the complex mountain car environment. 
+    In Wasserstein distance plots, both sparse reward environments show consistent model-environment discrepancies initially with any 
+    off-policy data retention. Smaller buffer updates lead to faster reduction in discrepancy. The MMD distance plots exhibit similar trends,
+    with higher buffer update values requiring more environment steps for convergence.
+  </p>
+</div>
+
+<center>
+  <img src="images/urb.JPG" alt="updates to retain buffer" width="100%" height="auto">
+  <figcaption>Figure 13: Ablation study over the number of updates to retain buffer hyperparameter conducted using
+    MBPO agent in Sparse Pendulum (Top row) and Mountain Car Continuous
+    (Bottom row) environment. (Left column) We report the learning curves, (Center column)
+    corresponds to the Wasserstein distance metric, and (Right column) corresponds
+    to the MMD distance metric of different updates to retain buffer </figcaption>
 </center>
 
 <div class="header">Conclusion</div>
