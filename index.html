@@ -301,6 +301,26 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 </center>
 
 
+<div class="text">
+  <p>
+    <strong>Rollouts per step Ablation</strong>, Figure 12 compares rollouts per step in sparse pendulum and mountain 
+    car environments. Figure 12 presents an ablation study in sparse pendulum and mountain car environments. In sparse
+    pendulum, M = 1000 resulted in lower returns, possibly due to noise from excessive rollouts or model complexity leading 
+    to memorization. In mountain car, M = 1000 initially sped up training but eventually showed a similar pattern to sparse pendulum. 
+    Wasserstein and MMD distance metric plots show consistent model behavior across different initial state quantities from the environment 
+    buffer. The model visits the same states and receives identical rewards during training.
+  </p>
+</div>
+
+<center>
+  <img src="images/rps.JPG" alt="rollout length ablation" width="100%" height="auto">
+  <figcaption>Figure 12: Ablation study over the number of rollouts per step hyperparameter conducted using
+    MBPO agent in Sparse Pendulum (Top row) and Mountain Car Continuous
+    (Bottom row) environment. (Left column) We report the learning curves, (Center
+    column) corresponds to theWasserstein distance metric, and (Right column) corresponds
+    to the MMD distance metric of different rollouts per step. </figcaption>
+</center>
+
 <div class="header">Conclusion</div>
 <p>
   In this study, we examined the influence of different model-based hyperparameters on model
