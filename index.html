@@ -73,9 +73,8 @@
   MBRL algorithm, namely Model-Based Policy Optimization (MBPO), and investigate the impact
   of various design decisions in the algorithm design when dealing with sparse rewards scenarios.
   Modifications suggested in the literature are used as a starting point for benchmarking performance
-  under sparse rewards in a customized sparse inverted pendulum, mountain car continuous and a complex DeepMind 
-  continuous control environment cheetah run, which are stochastic in terms of their initial state and are well 
-  suited for testing continuous control tasks.
+  under sparse rewards in a customized sparse inverted pendulum, mountain car continuous, which are stochastic 
+  in terms of their initial state and are well suited for testing continuous control tasks.
 </p>
 <br>
 
@@ -116,16 +115,31 @@
 <br>
 
 <div class="header">Hyperparameters</div>
-  <figure>
-    <img src="images/MBPO Agent.jpg" alt="Image Description" width="5%" height="auto">
-  </figure>
-  <p>
-    Here is some text that is placed beside the figure. You can provide additional information or context about the image.
-  </p>
+<div class="container">
+  <div class="image">
+    <img src="images/MBPO Agent.jpg" alt="Image"  width="10%" height="auto">
+  </div>
+  <div class="text">
+    <p>Your text goes here.</p>
+  </div>
+</div>
 
 
-
-</center>
+<div class="header">Conclusion</div>
+<p>
+  In this study, we examined the influence of different model-based hyperparameters on model
+  learning and observed which combination of these hyperparameters had the most substantial effect
+  on the policy optimization process. We discovered that longer rollout lengths made a substantial 
+  contribution to the evaluation returns in both sparse reward environments. We also observed that 
+  an ensemble size of one failed to effectively capture the environment dynamics in both sets of 
+  sparse reward environments. It was essential to opt for an ensemble size greater than one to more 
+  accurately capture the environment dynamics. Maintaining a moderate number of rollouts per step, 
+  combined with more frequent updates to the model parameters, proved sufficient to notably enhance 
+  evaluation returns, as this pattern was evident in both sparse reward environments. Regarding the 
+  retention of off-policy data, a higher level of retained off-policy data in the mountain car environment 
+  led to a significant increase in returns, whereas retaining off-policy data in the sparse pendulum environment 
+  was not necessary.
+</p>
 
 <div class="header">
   Model-Based Reinforcement Learning under Sparse Rewards

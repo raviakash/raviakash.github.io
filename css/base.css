@@ -36,6 +36,11 @@ body {
   color: #882222;
 }
 
+.container {
+  display: flex; /* Use flexbox for the layout */
+  align-items: center; /* Align items vertically in the middle */
+}
+
 .image {
   text-align: center;
   padding-top: .5em;
