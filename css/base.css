@@ -46,6 +46,10 @@ body {
   margin-right: 20px; /* Add some spacing between image and text */
 }
 
+.text {
+  flex: 1; /* Text will take remaining space */
+}
+
 .image {
   text-align: center;
   padding-top: .5em;
