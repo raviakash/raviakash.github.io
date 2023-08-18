@@ -28,7 +28,7 @@
 <center>
 <img src="images/TDA.jpg" alt="Arc reactor" width="100%" height="auto">
   <p>
-    What are the key components of Model-Based Reinforcement Learning algorithm to address the sparse rewards problem?
+    What are the key components of Model-Based Reinforcement Learning algorithms to address the sparse reward problem?
   </p>
 </center>
 
@@ -225,6 +225,28 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 <center>
   <img src="images/mountain car.JPG" alt="mountain car" width="40%" height="auto">
   <figcaption>Figure 8: Continuous Mountain Car </figcaption>
+</center>
+<br>
+
+<div class="header">Evaluation and Analysis</div>
+<p>
+  This section investigates the performance of model-free SAC and model-based MBPO agents in environments with sparse rewards. 
+  Two scenarios are considered: a sparse pendulum environment and a continuous mountain car environment. The introduction of an action cost, 
+  representing a penalty for certain actions, aims to make solving the sparse reward problem more challenging. The results show that in the 
+  absence of an action cost, both model-free and model-based agents successfully find sparse rewards. The model-based agent tends to converge 
+  faster. However, when an action cost is applied, the model-free SAC struggles due to its reliance on unstructured exploration. In contrast, 
+  the model-based MBPO agent performs better, utilizing its learned model to explore effectively and find solutions for a significant portion 
+  of trials. Similar conclusions are drawn from a study on the continuous mountain car problem. The SAC algorithm's unstructured exploration is 
+  found insufficient for these challenging tasks, while MBPO achieves better results.
+</p>
+
+<center>
+  <img src="images/mbposac.JPG" alt="mbpo vs sac" width="40%" height="auto">
+  <figcaption>Figure 9: (a) Learning curves of SAC and MBPO agents with and without action cost in sparse
+    pendulum environment. (b) Learning curves of SAC and MBPO agents in a sparse
+    continuous mountain car environment. Results presented show average returns over 20
+    random seeds which are smoothened by a moving average filter and we report the mean
+    (solid lines) and standard error (shaded regions). </figcaption>
 </center>
 
 
