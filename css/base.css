@@ -103,7 +103,6 @@ a:hover {
   padding-right: .5em;
 }
 
-
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* Two equal columns */
