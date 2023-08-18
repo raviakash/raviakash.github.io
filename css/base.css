@@ -38,7 +38,7 @@ body {
 
 .container {
   display: flex; /* Use flexbox for the layout */
-  align-items: left; /* Align items vertically in the left */
+  align-items: center; /* Align items vertically in the center */
 }
 
 .images {
