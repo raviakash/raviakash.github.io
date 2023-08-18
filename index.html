@@ -198,16 +198,33 @@
     generation.
   </p>
 </div>
+<br>
 
+<div class="header">Methodology and Experimental Setup</div>
+<p>
+Integral probability metrics are employed to measure the impact of design choices. This is achieved
+by evaluating the discrepancy between the distribution of observations and rewards perceived
+by the model and the state and reward distributions in real-world environment. Specifically, the
+Wasserstein distance metric is employed to quantify the discrepancy between rewards observed by
+the model and the actual rewards distribution present in the environment. The maximum mean
+discrepancy distance metric is utilized to assess the dissimilarity between the state distribution
+as observed by the model and the state distribution in the actual environment. These established
+metrics assist in illuminating the model interpretation of rewards and states when considering
+different components of the MBRL algorithm.
+<br>
+The study was carried out two continuous control sparse reward environments namely Sparse inverted Pendulum 
+and Continuous Mountian car as shown in Figure 7 and 8 respectively. 
+</p>
+<br>
+<center>
+  <img src="images/sparse pendulum.JPG" alt="sparse pendulum" width="40%" height="auto">
+  <figcaption>Figure 7: Sparse Pendulum </figcaption>
+</center>
 
-<div class="grid-container">
-  <div class="grid-item">
-    <img src="images/ensemble size.JPG" alt="Image 1">
-  </div>
-  <div class="grid-item">
-    <img src="images/ensemble size.JPG" alt="Image 2">
-  </div>
-</div>
+<center>
+  <img src="images/mountain car.JPG" alt="mountain car" width="40%" height="auto">
+  <figcaption>Figure 8: Continuous Mountain Car </figcaption>
+</center>
 
 
 <div class="header">Conclusion</div>
