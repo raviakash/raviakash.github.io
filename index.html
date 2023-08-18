@@ -352,15 +352,51 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
   was matched to model-free SAC by leveraging the fact that MBPO employs model-free SAC as a policy optimization component, 
   making it an extended iteration of model-free SAC in a model-based context.
 </p>
-  
+
 <center>
   <img src="images/reduced mbpo.JPG" alt="reduced mbpo" width="100%" height="auto">
   <figcaption>Figure 14: Learning curves representing the reduced performance of an MBPO agent operating
     close to model-free SAC agent in both sparse pendulum environment and
-    mountain car continuous environment using hyperparameter settings from Table
-    6.2. The results are the average (solid lines) and standard error (shaded regions)
+    mountain car continuous environment. The results are the average (solid lines) and standard error (shaded regions).
     over 20 random seeds. </figcaption>
 </center>
+<br>
+
+<div class="header">Final Ablation Study</div>
+<p>
+  We performed extensive study on the hyperparameters after reducing the performance of model-based MBPO close to model-free SAC. We discuss
+  here the most important findings of the study and for more detailed insights into the the study please refer to the final thesis report attached at the 
+  beginning of the page. 
+</p>
+<br>
+
+<p>
+Figure 15 shows the impact of longer rollout lengths in sparse reward environments using different rollout lengths. 
+In sparse pendulum, rollout length of value 20 was most effective, while in mountain car, varying rollout length values had similar positive impacts, 
+exceeding baseline performance. Wasserstein and MMD distance metrics confirmed these trends.
+</p>
+<center>
+  <img src="images/final rl.JPG" alt="rollout length final ablation" width="100%" height="auto">
+  <figcaption>Figure 15: Ablation study over longer rollout lengths using MBPO agent operating
+    close to a model-free SAC agent in both sparse pendulum and mountain car continuous environment. 
+    The results are the average (solid lines) and standard error (shaded regions) over 20 random seeds.</figcaption>
+</center>
+<br>
+
+<p>
+Figure 16 investigates buffer update retention effects in sparse reward environments. In mountain car, more off-policy data 
+improves learning significantly, while in sparse pendulum, off-policy data has little impact, favoring on-policy updates. 
+This observation aligns with the evaluation return plot and distance metric results, reinforcing the role of off-policy data 
+in enhancing complex learning scenarios like mountain car.
+</p>
+
+<center>
+  <img src="images/final urb.JPG" alt="updates to retain bufffer final ablation" width="100%" height="auto">
+  <figcaption>Figure 16: Ablation study over updates to retain buffer using MBPO agent operating close to a
+    model-free SAC agent in sparse pendulum and mountain car continuous. The results are the average
+    (solid lines) and standard error (shaded regions) over 20 random seeds. </figcaption>
+</center>
+<br>
 
 
 
