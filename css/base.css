@@ -102,3 +102,20 @@ a:hover {
   text-decoration: none;
   padding-right: .5em;
 }
+
+
+.flex-container {
+  display: flex;
+  gap: 20px; /* Add some spacing between the figures */
+}
+
+.figure {
+  flex: 1; /* Equal distribution of space for both figures */
+  max-width: 50%; /* Ensure figures don't exceed half the container width */
+  box-sizing: border-box;
+}
+
+.figure img {
+  width: 100%;
+  height: auto;
+}
