@@ -341,6 +341,28 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
     corresponds to the Wasserstein distance metric, and (Right column) corresponds
     to the MMD distance metric of different updates to retain buffer </figcaption>
 </center>
+<br>
+
+<div class="header">Reduced MBPO Performance</div>
+<p>
+  To understand the key hyperparameters in the MBRL algorithm, adjustments were made to align MBPO's performance with 
+  model-free SAC in sparse reward settings. By modifying existing model-based hyperparameters, the performance of MBPO 
+  was approximated to that of SAC. This was achieved with 20 seeds and an ensemble size of 1. Experimenting with scaled-up 
+  hyperparameters individually further analyzed their influence on MBPO's performance in sparse rewards. MBPO's performance 
+  was matched to model-free SAC by leveraging the fact that MBPO employs model-free SAC as a policy optimization component, 
+  making it an extended iteration of model-free SAC in a model-based context.
+</p>
+  
+<center>
+  <img src="images/reduced mbpo.JPG" alt="reduced mbpo" width="100%" height="auto">
+  <figcaption>Figure 14: Learning curves representing the reduced performance of an MBPO agent operating
+    close to model-free SAC agent in both sparse pendulum environment and
+    mountain car continuous environment using hyperparameter settings from Table
+    6.2. The results are the average (solid lines) and standard error (shaded regions)
+    over 20 random seeds. </figcaption>
+</center>
+
+
 
 <div class="header">Conclusion</div>
 <p>
