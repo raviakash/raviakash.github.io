@@ -34,78 +34,62 @@
 
 <div class="header">Abstract</div>
 <p>
-    Reinforcement Learning (RL) has recently seen significant advances over the last decade in simulated
-    and controlled environments. RL has shown impressive results in difficult decision-making problems
-    such as playing video games or controlling robot arms, especially in industrial applications where
-    most methods require many interactions with the system in order to achieve good performance,
-    which can be costly and time-consuming. Model-Based Reinforcement Learning (MBRL) promises
-    to close this gap by leveraging learned environment models and using them for data generation
-    and/or planning and, at the same time trying to be sample efficient. However, Learning with
-    sparse rewards remains a significant challenge in the field of RL. In order to promote efficient
-    learning the sparsity of rewards must be addressed. This thesis work tries to study individual
-    components of MBRL algorithms under sparse reward settings and investigate different design
-    choices made to measure the impact on learning efficiency. Suitable Integral Probability Metrics
-    (IPM) are introduced to understand the predictive model reward and observation space distribution during
-    training. These design combinations will be evaluated on continuous control tasks with established
-    benchmarks.
+  Reinforcement Learning (RL) has recently seen significant advances over the last decade in simulated and controlled environments. 
+  RL has shown impressive results in difficult decision-making problems such as playing video games or controlling robot arms, especially 
+  in industrial applications where most methods require many interactions with the system to achieve good performance, which can be costly 
+  and time-consuming. Model-Based Reinforcement Learning (MBRL) promises to close this gap by leveraging learned environment models and using 
+  them for data generation and/or planning and, at the same time trying to be sample efficient. However, Learning with sparse rewards remains 
+  a significant challenge in the field of RL. To promote efficient learning the sparsity of rewards must be addressed. This thesis work tries 
+  to study individual components of MBRL algorithms under sparse reward settings and investigate different design choices made to measure the 
+  impact on learning efficiency. Suitable Integral Probability Metrics (IPM) are introduced to understand the predictive model reward and 
+  observation space distribution during training. These design combinations will be evaluated on continuous control tasks with established 
+  benchmarks.
 </p>
 <br>
 
 <div class="header">Introduction</div>
 <p>
-  The major motivation behind studying sparse reward problems is that it requires close to no domain
-  knowledge to design a reward function for a given task/environment. For example, in a continuous
-  control task where a robotic arm task is required to stack an object on top of other objects, we
-  can assign a sparse reward of 1 if the robotic arm successfully stacks the object and 0 otherwise.
-  Designing intermediate rewards in this scenario can be challenging and in most cases not practical.
-  The sparse reward problem has been addressed in previous state-of-the-art literature in a plethora
-  of ways. However, research in MBRL under a sparse reward setting has not answered some key questions 
-  such as how accurate and diverse the model should be, how much off-policy data must be stored inside 
-  the model buffer, and how long the rollout trajectory should be. While it is fairly common for authors 
-  to regularly experiment and provide various algorithms for solving sparse reward tasks, it still remains 
-  an open question as to what the key ingredients and design choices which are essential for solving sparse
-  reward tasks. The study carried out in this thesis helps us understand why some hyperparameter design choices 
-  might be working better than others through the lens of the dataset which we use to train the agent.
+  The major motivation behind studying sparse reward problems is that it requires close to no domain knowledge to design a reward function for 
+  a given task/environment. For example, in a continuous control task where a robotic arm task is required to stack an object on top of other 
+  objects, we can assign a sparse reward of 1 if the robotic arm successfully stacks the object and 0 otherwise. Designing intermediate rewards 
+  in this scenario can be challenging and in most cases not practical. The sparse reward problem has been addressed in previous state-of-the-art 
+  literature in a plethora of ways. However, research in MBRL under a sparse reward setting has not answered some key questions such as how accurate 
+  and diverse the model should be, how much off-policy data must be stored inside the model buffer, and how long the rollout trajectory should be. 
+  While it is fairly common for authors to regularly experiment and provide various algorithms for solving sparse reward tasks, it remains an open 
+  question as to what the key ingredients and design choices which are essential for solving sparse reward tasks. The study carried out in this thesis 
+  helps us understand why some hyperparameter design choices might be working better than others through the lens of the dataset which we use to train 
+  the agent.
   <br>
-  The primary focus of this study revolves around understanding the essential elements within the
-  Model-Based Reinforcement Learning algorithm that effectively tackle the challenge of
-  sparse rewards. The objective of this thesis is to thoroughly examine the current state-of-the-art
-  MBRL algorithm, namely Model-Based Policy Optimization (MBPO), and investigate the impact
-  of various design decisions in the algorithm design when dealing with sparse rewards scenarios.
-  Modifications suggested in the literature are used as a starting point for benchmarking performance
-  under sparse rewards in a customized sparse inverted pendulum, mountain car continuous, which are stochastic 
-  in terms of their initial state and are well suited for testing continuous control tasks.
+  The primary focus of this study revolves around understanding the essential elements within the Model-Based Reinforcement Learning algorithm that 
+  effectively tackles the challenge of sparse rewards. The objective of this thesis is to thoroughly examine the current state-of-the-art MBRL algorithm, 
+  namely Model-Based Policy Optimization (MBPO), and investigate the impact of various design decisions in the algorithm design when dealing with sparse 
+  rewards scenarios. Modifications suggested in the literature are used as a starting point for benchmarking performance under sparse rewards in a customized
+  sparse inverted pendulum, mountain car continuous, which are stochastic in terms of their initial state and are well suited for testing continuous control 
+  tasks.
 </p>
 <br>
 
 <div class="header">Model-Based Policy Optimization</div>
 <p>
-  The natural choice of MBPO model-based algorithm to further investigate is that it is a natural extension
-  of model-free counterpart SAC. In this approach, the learned model is used to gather imaginary
-  data to train a policy. To gather this imaginary data, a bootstrap ensemble of dynamics model is
-  utilized where each member of the ensemble is a probabilistic neural network. Using probabilistic
-  neural networks, aleatoric uncertainty, or noise in outputs relative to inputs, is captured while
-  bootstrapping ensures to capture of epistemic uncertainty or uncertainty in model parameters. To
-  generate a prediction from the ensemble, a random model is sampled from the ensemble of the
-  dynamics model to test different transitions along a single model rollout.
+  The natural choice of the MBPO model-based algorithm to further investigate is that it is a natural extension of the model-free counterpart SAC. In this approach, 
+  the learned model is used to gather imaginary data to train a policy. To gather this imaginary data, a bootstrap ensemble of dynamics model is utilized where each
+   member of the ensemble is a probabilistic neural network. Using probabilistic neural networks, aleatoric uncertainty, or noise in outputs relative to inputs, is 
+   captured while bootstrapping ensures to capture of epistemic uncertainty or uncertainty in model parameters. To generate a prediction from the ensemble, a random 
+   model is sampled from the ensemble of the dynamics model to test different transitions along a single model rollout.
   <br>
   <center>
   <img src="images/MBPO Agent.jpg" alt="MBPO architecture" width="50%" height="auto">
-  <figcaption>Figure 1: Detailed architecture depicting the individual components of an MBPO agent, which
-    utilizes SAC as a policy optimization algorithm. The Figure depicts the interaction of the
-    SAC agent with the stochastic environment to collect real experiences, which are later
-    utilized to train a predictive model to generate a simulated experience. This simulated
-    experience is later utilized as input to the SAC algorithm for policy optimization.</figcaption>
+  <figcaption>Figure 1: Detailed architecture depicting the individual components of an MBPO agent, which utilizes SAC as a policy optimization algorithm. 
+    The Figure depicts the interaction of the SAC agent with the stochastic environment to collect real experiences, which are later utilized to train a predictive 
+    model to generate a simulated experience. This simulated experience is later utilized as input to the SAC algorithm for policy optimization.</figcaption>
   </center>
   <br>
-  Policy optimization is performed using SAC (Soft Actor-Critic), where SAC alternates between a policy evaluation step, 
-  which estimates the state-action value function, and a policy improvement step. For all the experiments, we use the 
-  automatic entropy tuning flag that adaptively modifies the entropy gain based on the stochasticity of the policy.
-  Performing extended model rollouts leads to compounding error problems. To mitigate this problem,
-  the MBPO algorithm begins propagating short model rollouts from state distribution of a different
-  policy under the true environment dynamics. As a result, a few long trajectories with large errors
-  can be traded for many short trajectories with smaller errors. The Figure 1 shows the architecture
-  of a MBPO agent.
+
+  Policy optimization is performed using SAC (Soft Actor-Critic), where SAC alternates between a policy evaluation step, which estimates the state-action value function, 
+  and a policy improvement step. For all the experiments, we use the automatic entropy tuning flag that adaptively modifies the entropy gain based on the stochasticity 
+  of the policy. Performing extended model rollouts leads to compounding error problems. To mitigate this problem, the MBPO algorithm begins propagating short model 
+  rollouts from state distribution of a different policy under the true environment dynamics. As a result, a few long trajectories with large errors can be traded for 
+  many short trajectories with smaller errors. Figure 1 shows the architecture of a MBPO agent.
   <br>
   <center>
     <img src="images/MBPO algorithm.JPG" alt="MBPO algorithm" width="75%" height="auto">
@@ -116,8 +100,8 @@
 
 <div class="header">Hyperparameters</div>
 <p>
-  We discuss the list of main model-based hyperparameters utilized in this study for carrying out the ablation study 
-  and which play an important role in the design choices of the MBRL algorithm.
+  We discuss the list of main model-based hyperparameters utilized in this study for carrying out the ablation study and which play an 
+  important role in the design choices of the MBRL algorithm.
 </p>
 <br>
 
@@ -127,11 +111,10 @@
 </center>
 <div class="text">
   <p>
-    <strong>Model rollout length (k)</strong>, refers to the number of steps taken by the agent during the rollout phase.
-    A rollout is a simulated sequence of actions taken by the agent, starting from an initial state and
-    following a particular policy until a terminal state or a predefined time horizon is reached. Rollout
-    length determines the length of the prediction horizon generated by the model to estimate the
-    expected returns of various policies.
+    <strong>Model rollout length (k)</strong>, refers to the number of steps taken by the agent during the rollout phase. A rollout is a 
+    simulated sequence of actions taken by the agent, starting from an initial state and following a particular policy until a terminal state 
+    or a predefined time horizon is reached. Rollout length determines the length of the prediction horizon generated by the model to estimate 
+    the expected returns of various policies.
   </p>
 </div>
 
@@ -141,9 +124,8 @@
 </center>
 <div class="text">
   <p>
-    <strong>Number of rollouts per step (M)</strong>, refers to the number of rollouts generated by a model per training
-    step. This hyperparameter controls the number of rollouts executed under the model, it has a direct
-    control on the amount of data generated by the model.
+    <strong>Number of rollouts per step (M)</strong>,  refers to the number of rollouts generated by a model per training step. This hyperparameter 
+    controls the number of rollouts executed under the model, it has a direct control on the amount of data generated by the model.
   </p>
 </div>
 
@@ -153,9 +135,8 @@
 </center>
 <div class="text">
   <p>
-    <strong>Updates to retain buffer (R)</strong>, refers to the number of model updates that are retained in the replay
-    buffer. The replay buffer contains past experiences of the agent, typically consisting of state, action,
-    reward, next-state, and done flags stored as tuples.
+    <strong>Updates to retain buffer (R)</strong>, refers to the number of model updates that are retained in the replay buffer. The replay buffer contains 
+    past experiences of the agent, typically consisting of state, action, reward, next-state, and done flags stored as tuples.
   </p>
 </div>
 
@@ -165,55 +146,44 @@
 </center>
 <div class="text">
   <p>
-    <strong>Ensemble size (N)</strong>, refers to the number of models or dynamics functions used in the ensemble.
-    Each model present in the ensemble is a probabilistic neural network whose outputs parameterize a
-    Gaussian distribution. Ensemble models are responsible for capturing both aleatoric and epistemic uncertainties.
+    <strong>Ensemble size (N)</strong>, refers to the number of models or dynamics functions used in the ensemble. Each model present in the ensemble is a 
+    probabilistic neural network whose outputs parameterize a Gaussian distribution. Ensemble models are responsible for capturing both aleatoric and epistemic uncertainties.
   </p>
 </div>
 
 <div class="text">
   <p>
-    <strong>Frequency of model retrain (F)</strong>, refers to how frequently the model is retrained during the training
-    process. This hyperparameter determines the frequency at which the model parameters are updated
-    to improve the performance of the model
+    <strong>Frequency of model retrain (F)</strong>, refers to how frequently the model is retrained during the training process. This hyperparameter determines the frequency 
+    at which the model parameters are updated to improve the performance of the model.
   </p>
 </div>
 
 <div class="text">
   <p>
-    <strong>Trainer Patience (P)</strong>, refers to a parameter used for early stopping during model training. If the
-    validation performance does not improve for consecutive epochs, training is halted to prevent further
-    training on potentially overfitting the model.
+    <strong>Trainer Patience (P)</strong>, refers to a parameter used for early stopping during model training. If the validation performance does not improve for consecutive epochs, 
+    training is halted to prevent further training on potentially overfitting the model.
   </p>
 </div>
 
 <div class="text">
   <p>
-    <strong>Model Generated Buffers</strong>, are created by using a predictive model to generate additional synthetic
-    data for MBRL algorithms. Model-generated buffers are used to augment the
-    environment dataset and improve the agent learning performance. This augmented dataset is
-    utilized to simulate imaginary actions and outcomes, expanding the range of collected experiences.
-    As a result, the capacity of the model-generated buffers is computed as k x M x F x R.
-    The capacity of the model replay buffer is defined in such a manner as to hold R iterations of data
-    generation.
+    <strong>Model Generated Buffers</strong>, are created by using a predictive model to generate additional synthetic data for MBRL algorithms. Model-generated buffers are used to augment 
+    the environment dataset and improve the agent learning performance. This augmented dataset is utilized to simulate imaginary actions and outcomes, expanding the range of collected experiences. 
+    As a result, the capacity of the model-generated buffers is computed as k x M x F x R. The capacity of the model replay buffer is defined in such a manner as to hold R iterations of data generation.
   </p>
 </div>
 <br>
 
 <div class="header">Methodology and Experimental Setup</div>
 <p>
-Integral probability metrics are employed to measure the impact of design choices. This is achieved
-by evaluating the discrepancy between the distribution of observations and rewards perceived
-by the model and the state and reward distributions in real-world environment. Specifically, the
-Wasserstein distance metric is employed to quantify the discrepancy between rewards observed by
-the model and the actual rewards distribution present in the environment. The maximum mean
-discrepancy distance metric is utilized to assess the dissimilarity between the state distribution
-as observed by the model and the state distribution in the actual environment. These established
-metrics assist in illuminating the model interpretation of rewards and states when considering
-different components of the MBRL algorithm.
+  Integral probability metrics are employed to measure the impact of design choices. This is achieved by evaluating the discrepancy between the distribution of observations 
+  and rewards perceived by the model and the state and reward distributions in a real-world environment. Specifically, the Wasserstein distance metric is employed to quantify 
+  the discrepancy between rewards observed by the model and the actual rewards distribution present in the environment. The maximum mean discrepancy distance metric is 
+  utilized to assess the dissimilarity between the state distribution as observed by the model and the state distribution in the actual environment. These established 
+  metrics assist in illuminating the model interpretation of rewards and states when considering different components of the MBRL algorithm.
 <br>
-The study was carried out two continuous control sparse reward environments namely Sparse Inverted Pendulum 
-and Continuous Mountian car as shown in Figure 7 and 8 respectively. 
+The study was carried out in two continuous control sparse reward environments namely Sparse Inverted Pendulum and Continuous Mountian car as shown in Figures 7 and 8 
+respectively.
 </p>
 <br>
 
@@ -230,14 +200,14 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 
 <div class="header">Evaluation and Analysis</div>
 <p>
-  We intially investigate the performance of model-free SAC and model-based MBPO agents in environments with sparse rewards. 
-  Two scenarios are considered: a sparse pendulum environment and a continuous mountain car environment. The introduction of an action cost, 
-  representing a penalty for certain actions, aims to make solving the sparse reward problem more challenging. The results show that in the 
-  absence of an action cost, both model-free and model-based agents successfully find sparse rewards. The model-based agent tends to converge 
-  faster. However, when an action cost is applied, the model-free SAC struggles due to its reliance on unstructured exploration. In contrast, 
-  the model-based MBPO agent performs better, utilizing its learned model to explore effectively and find solutions for a significant portion 
-  of trials. Similar conclusions are drawn from a study on the continuous mountain car problem. The SAC algorithm's unstructured exploration is 
-  found insufficient for these challenging tasks, while MBPO achieves better results.
+  We initially investigate the performance of model-free SAC and model-based MBPO agents in environments with sparse rewards. 
+  Two scenarios are considered: a sparse pendulum environment and a continuous mountain car environment. The introduction of an 
+  action cost, representing a penalty for certain actions, aims to make solving the sparse reward problem more challenging. The results show 
+  that in the absence of an action cost, both model-free and model-based agents successfully find sparse rewards. The model-based agent tends 
+  to converge faster. However, when an action cost is applied, the model-free SAC struggles due to its reliance on unstructured exploration. 
+  In contrast, the model-based MBPO agent performs better, utilizing its learned model to explore effectively and find solutions for a significant 
+  portion of trials. Similar conclusions are drawn from a study on the continuous mountain car problem. The SAC algorithm's unstructured exploration 
+  is found insufficient for these challenging tasks, while MBPO achieves better results.
 </p>
 
 <center>
@@ -250,15 +220,13 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 </center>
 
 <p>
-  Figure 10 illustrates an experiment using an MBPO agent in a sparse pendulum environment, depicting reward 
-  distribution changes during training. The comparison involves the model predictions, the actual environment, 
-  and the true reward distribution. The true reward distribution is generated by passing model observations and 
-  actions through the environment's reward function. Initially, the agent explores widely due to an inaccurate model, 
-  leading to a broad reward distribution. With experience and model updates, predictions become more accurate, 
-  especially as actual rewards begin to appear. Initially, the distribution is wide around sparse reward regions due to limited data. 
-  As experience accumulates around reward areas, the distribution narrows and concentrates around the reward. This analysis enhances understanding 
-  of how the model perceives rewards. The study further explores how various hyperparameter combinations impact the model's 
-  perception and reward distribution, aiding in solving sparse reward problems.
+  Figure 10 Figure 10 illustrates an experiment using an MBPO agent in a sparse pendulum environment, depicting reward distribution changes during 
+  training. The comparison involves the model predictions, the actual environment, and the true reward distribution. The true reward distribution is 
+  generated by passing model observations and actions through the environment's reward function. Initially, the agent explores widely due to an 
+  inaccurate model, leading to a broad reward distribution. With experience and model updates, predictions become more accurate, especially as actual 
+  rewards begin to appear. Initially, the distribution is wide around sparse reward regions due to limited data. As experience accumulates around reward 
+  areas, the distribution narrows and concentrates around the reward. This analysis enhances understanding of how the model perceives rewards. The study 
+  further explores how various hyperparameter combinations impact the model's perception and reward distribution, aiding in solving sparse reward problems.
 </p>  
 
 <center>
@@ -279,15 +247,14 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 
 <div class="text">
   <p>
-    <strong>Rollout Length Ablation</strong>, Figure 11 compares rollout lengths in sparse pendulum and mountain 
-    car environments. Longer rollouts yield higher returns, highlighting the need for exploration. Short rollouts 
-    limit exploration and risk getting stuck. The hypothesis is supported in both environments, with better results 
-    for longer rollouts. In the Wasserstein metric plots, differences between model and environment reward distributions 
-    decrease over sparse pendulum training, while longer rollout lengths increase disparities in mountain car, reflecting 
-    early unfamiliar state exploration that converges with training progress. In MMD distance plots, higher rollout lengths 
-    cause greater disparities between model-generated and environment state distributions initially. As training advances, 
-    the MMD distance decreases, aligning distributions. A rollout length of 1 shows unique behavior, with MMD distance increasing 
-    as training progresses, indicating on-policy operation closely resembling environment states.
+    <strong>Rollout Length Ablation</strong>,  Figure 11 compares rollout lengths in sparse pendulum and mountain car environments. 
+    Longer rollouts yield higher returns, highlighting the need for exploration. Short rollouts limit exploration and the risk of getting stuck. 
+    The hypothesis is supported in both environments, with better results for longer rollouts. In the Wasserstein metric plots, differences between 
+    model and environment reward distributions decrease over sparse pendulum training, while longer rollout lengths increase disparities in mountain 
+    cars, reflecting early unfamiliar state exploration that converges with training progress. In MMD distance plots, higher rollout lengths cause 
+    greater disparities between model-generated and environment-state distributions initially. As training advances, the MMD distance decreases, 
+    aligning distributions. A rollout length of 1 shows unique behavior, with MMD distance increasing as training progresses, indicating on-policy 
+    operation closely resembling environment states.
   </p>
 </div>
 
@@ -303,12 +270,11 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 
 <div class="text">
   <p>
-    <strong>Rollouts per step Ablation</strong>, Figure 12 compares rollouts per step in sparse pendulum and mountain 
-    car environments. In sparse
-    pendulum, M = 1000 resulted in lower returns, possibly due to noise from excessive rollouts or model complexity leading 
-    to memorization. In mountain car, M = 1000 initially sped up training but eventually showed a similar pattern to sparse pendulum. 
-    Wasserstein and MMD distance metric plots show consistent model behavior across different initial state quantities from the environment 
-    buffer. The model visits the same states and receives identical rewards during training.
+    <strong>Rollouts per step Ablation</strong>, Figure 12 compares rollouts per step in the sparse pendulum and mountain car environments. 
+    In a sparse pendulum, M = 1000 resulted in lower returns, possibly due to noise from excessive rollouts or model complexity leading to memorization. 
+    In mountain cars, M = 1000 initially sped up training but eventually showed a similar pattern to the sparse pendulum. Wasserstein and MMD distance 
+    metric plots show consistent model behavior across different initial state quantities from the environment buffer. The model visits the same states 
+    and receives identical rewards during training.
   </p>
 </div>
 
@@ -323,13 +289,12 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 
 <div class="text">
   <p>
-    <strong>Updates to retain buffer</strong>, Figure 13 compares updates to retain buffer in sparse pendulum and mountain 
-    car environment. In Figure 13, the evaluation return plots show that in sparse pendulum, retaining buffer values at 1 yields 
-    on-policy behavior and contributes to better learning performance. In complex mountain car, having more off-policy data helps solve 
-    the environment which indicates that retaining past information assisted the model in solving the complex mountain car environment. 
-    In Wasserstein distance plots, both sparse reward environments show consistent model-environment discrepancies initially with any 
-    off-policy data retention. Smaller buffer updates lead to faster reduction in discrepancy. The MMD distance plots exhibit similar trends,
-    with higher buffer update values requiring more environment steps for convergence.
+    <strong>Updates to retain buffer</strong>, Figure 13 compares updates to retain buffer in the sparse pendulum and mountain car environment. 
+    In Figure 13, the evaluation return plots show that in the sparse pendulum, retaining buffer values at 1 yields on-policy behavior and contributes 
+    to better learning performance. In complex mountain car, having more off-policy data helps solve the environment which indicates that retaining past 
+    information assisted the model in solving the complex mountain car environment. In Wasserstein distance plots, both sparse reward environments show 
+    consistent model-environment discrepancies initially with any off-policy data retention. Smaller buffer updates lead to a faster reduction in discrepancy. 
+    The MMD distance plots exhibit similar trends, with higher buffer update values requiring more environment steps for convergence.
   </p>
 </div>
 
@@ -345,12 +310,11 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 
 <div class="header">Reduced MBPO Performance</div>
 <p>
-  To understand the key hyperparameters in the MBRL algorithm, adjustments were made to align MBPO's performance with 
-  model-free SAC in sparse reward settings. By modifying existing model-based hyperparameters, the performance of MBPO 
-  was approximated to that of SAC. This was achieved with 20 seeds and an ensemble size of 1. Experimenting with scaled-up 
-  hyperparameters individually further analyzed their influence on MBPO's performance in sparse rewards. MBPO's performance 
-  was matched to model-free SAC by leveraging the fact that MBPO employs model-free SAC as a policy optimization component, 
-  making it an extended iteration of model-free SAC in a model-based context.
+  To understand the key hyperparameters in the MBRL algorithm, adjustments were made to align MBPO's performance with model-free SAC in sparse reward settings. 
+  By modifying existing model-based hyperparameters, the performance of MBPO was approximated to that of SAC. This was achieved with 20 seeds and an ensemble size of 1. 
+  Experimenting with scaled-up hyperparameters individually further analyzed their influence on MBPO's performance in sparse rewards. MBPO's performance was matched to 
+  model-free SAC by leveraging the fact that MBPO employs model-free SAC as a policy optimization component, making it an extended iteration of model-free SAC in a 
+  model-based context.
 </p>
 
 <center>
@@ -364,16 +328,16 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
 
 <div class="header">Final Ablation Study</div>
 <p>
-  We performed extensive study on the hyperparameters after reducing the performance of model-based MBPO close to model-free SAC. We discuss
-  here the most important findings of the study and for more detailed insights into the the study please refer to the final thesis report attached at the 
-  beginning of the page. 
+We performed an extensive study on the hyperparameters after reducing the performance of model-based MBPO close to model-free SAC. 
+We discuss here the most important findings of the study and for more detailed insights into the study please refer to the final thesis 
+report attached at the beginning of the page.
 </p>
 <br>
 
 <p>
-Figure 15 shows the impact of longer rollout lengths in sparse reward environments using different rollout lengths. 
-In sparse pendulum, rollout length of value 20 was most effective, while in mountain car, varying rollout length values had similar positive impacts, 
-exceeding baseline performance. Wasserstein and MMD distance metrics confirmed these trends.
+  Figure 15 shows the impact of longer rollout lengths in sparse reward environments using different rollout lengths. In sparse pendulum, 
+  a rollout length of value 20 was most effective, while in mountain car, varying rollout length values had similarly positive impacts, exceeding 
+  baseline performance. Wasserstein and MMD distance metrics confirmed these trends.
 </p>
 <center>
   <img src="images/final rl.JPG" alt="rollout length final ablation" width="100%" height="auto">
@@ -384,10 +348,9 @@ exceeding baseline performance. Wasserstein and MMD distance metrics confirmed t
 <br>
 
 <p>
-Figure 16 investigates buffer update retention effects in sparse reward environments. In mountain car, more off-policy data 
-improves learning significantly, while in sparse pendulum, off-policy data has little impact, favoring on-policy updates. 
-This observation aligns with the evaluation return plot and distance metric results, reinforcing the role of off-policy data 
-in enhancing complex learning scenarios like mountain car.
+  Figure 16 investigates buffer update retention effects in sparse reward environments. In mountain cars, more off-policy data improves learning significantly, 
+  while in the sparse pendulum, off-policy data has little impact, favoring on-policy updates. This observation aligns with the evaluation return plot and distance 
+  metric results, reinforcing the role of off-policy data in enhancing complex learning scenarios like mountain cars.
 </p>
 
 <center>
@@ -398,22 +361,15 @@ in enhancing complex learning scenarios like mountain car.
 </center>
 <br>
 
-
-
 <div class="header">Conclusion</div>
 <p>
-  In this study, we examined the influence of different model-based hyperparameters on model
-  learning and observed which combination of these hyperparameters had the most substantial effect
-  on the policy optimization process. We discovered that longer rollout lengths made a substantial 
-  contribution to the evaluation returns in both sparse reward environments. We also observed that 
-  an ensemble size of one failed to effectively capture the environment dynamics in both sets of 
-  sparse reward environments. It was essential to opt for an ensemble size greater than one to more 
-  accurately capture the environment dynamics. Maintaining a moderate number of rollouts per step, 
-  combined with more frequent updates to the model parameters, proved sufficient to notably enhance 
-  evaluation returns, as this pattern was evident in both sparse reward environments. Regarding the 
-  retention of off-policy data, a higher level of retained off-policy data in the mountain car environment 
-  led to a significant increase in returns, whereas retaining off-policy data in the sparse pendulum environment 
-  was not necessary.
+  In this study, we examined the influence of different model-based hyperparameters on model learning and observed which combination of these hyperparameters 
+  had the most substantial effect on the policy optimization process. We discovered that longer rollout lengths made a substantial contribution to the 
+  evaluation returns in both sparse reward environments. We also observed that an ensemble size of one failed to effectively capture the environment dynamics 
+  in both sets of sparse reward environments. It was essential to opt for an ensemble size greater than one to more accurately capture the environment dynamics.
+  Maintaining a moderate number of rollouts per step, combined with more frequent updates to the model parameters, proved sufficient to notably enhance evaluation 
+  returns, as this pattern was evident in both sparse reward environments. Regarding the retention of off-policy data, a higher level of retained off-policy data 
+  in the mountain car environment led to a significant increase in returns, whereas retaining off-policy data in the sparse pendulum environment was not necessary.
 </p>
 
 <div class="header">
@@ -427,7 +383,7 @@ in enhancing complex learning scenarios like mountain car.
 </div>
 <br>
 
-<div class="header">Acknowledgements</div>
+<div class="header">Acknowledgments</div>
 <p>
   I extend my sincere appreciation to my advisors, colleagues, family, and friends who have guided and supported me throughout 
   this journey as a master's thesis student. Your expertise, encouragement, and valuable insights have been pivotal in 
