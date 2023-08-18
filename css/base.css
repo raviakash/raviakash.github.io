@@ -104,18 +104,13 @@ a:hover {
 }
 
 
-.flex-container {
-  display: flex;
-  gap: 20px; /* Add some spacing between the figures */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Two equal columns */
+  gap: 20px; /* Add spacing between images */
 }
 
-.figure {
-  flex: 1; /* Equal distribution of space for both figures */
-  max-width: 50%; /* Ensure figures don't exceed half the container width */
-  box-sizing: border-box;
-}
-
-.figure img {
-  width: 100%;
+.grid-item img {
+  max-width: 100%; /* Ensure images fit within their containers */
   height: auto;
 }
