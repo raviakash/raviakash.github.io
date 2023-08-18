@@ -277,6 +277,29 @@ and Continuous Mountian car as shown in Figure 7 and 8 respectively.
     which serves as ground truth for comparison with environment rewards. </figcaption>
 </center>
 
+<div class="text">
+  <p>
+    <strong>Rollout Length Ablation</strong>, Figure 11 compares rollout lengths in sparse pendulum and mountain 
+    car environments. Longer rollouts yield higher returns, highlighting the need for exploration. Short rollouts 
+    limit exploration and risk getting stuck. The hypothesis is supported in both environments, with better results 
+    for longer rollouts. In the Wasserstein metric plots, differences between model and environment reward distributions 
+    decrease over sparse pendulum training, while longer rollout lengths increase disparities in mountain car, reflecting 
+    early unfamiliar state exploration that converges with training progress. In MMD distance plots, higher rollout lengths 
+    cause greater disparities between model-generated and environment state distributions initially. As training advances, 
+    the MMD distance decreases, aligning distributions. A rollout length of 1 shows unique behavior, with MMD distance increasing 
+    as training progresses, indicating on-policy operation closely resembling environment states.
+  </p>
+</div>
+
+<center>
+  <img src="images/rl.JPG" alt="rollout length ablation" width="100%" height="auto">
+  <figcaption>Figure 11: Ablation study over rollout length hyperparameter conducted using MBPO agent
+    in sparse pendulum (Top row) and mountain car continuous (Bottom row)
+    environment. (Left column)We report the learning curves, (Center column) corresponds
+    to theWasserstein distance metric, and (Right column) corresponds to theMMDdistance
+    metric of different rollout lengths. </figcaption>
+</center>
+
 
 <div class="header">Conclusion</div>
 <p>
