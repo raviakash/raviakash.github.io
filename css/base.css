@@ -41,6 +41,11 @@ body {
   align-items: center; /* Align items vertically in the middle */
 }
 
+.images {
+  flex: 0 0 auto; /* Image won't grow or shrink */
+  margin-right: 20px; /* Add some spacing between image and text */
+}
+
 .image {
   text-align: center;
   padding-top: .5em;
